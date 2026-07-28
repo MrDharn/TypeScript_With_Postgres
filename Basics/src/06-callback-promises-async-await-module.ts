@@ -36,16 +36,16 @@ function funWithCallBack(userId: number, callback: (error: null | Error, user?: 
 
 }
 
-// funWithCallBack(3, (error, user)=>{
-//     if(error){
-//         console.log("callback error", error.message)
-//         return 
-//     }
+funWithCallBack(3, (error, user)=>{
+    if(error){
+        console.log("callback error", error.message)
+        return 
+    }
 
-//     console.log("callback result", user)
+    console.log("callback result", user)
 
 
-// })
+})
 
 
 
