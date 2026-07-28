@@ -36,13 +36,37 @@ function funWithCallBack(userId: number, callback: (error: null | Error, user?: 
 
 }
 
-funWithCallBack(3, (error, user)=>{
-    if(error){
-        console.log("callback error", error.message)
-        return 
-    }
+// funWithCallBack(3, (error, user)=>{
+//     if(error){
+//         console.log("callback error", error.message)
+//         return 
+//     }
 
-    console.log("callback result", user)
+//     console.log("callback result", user)
 
 
+// })
+
+
+
+function getUserWithPromise(userId: number): Promise<User>{
+    return new Promise((resolve, reject)=> {
+        setTimeout(()=>{
+            const fetchUser =  users.find((user)=> user.id === userId)
+
+            if(!fetchUser){
+            
+                reject(new Error(`Sorrry there is no user with the id ${userId}`))
+                return
+            }
+
+            resolve(fetchUser)
+        }, 1000)
+    })
+}
+
+getUserWithPromise(10).then((user)=>{
+    console.log("promise result", user?.id, user?.name, user?.role)
+}).catch((error: Error)=>{
+    console.log("Error message", error)
 })
