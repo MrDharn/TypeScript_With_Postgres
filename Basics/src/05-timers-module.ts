@@ -1,3 +1,5 @@
+ import { setTimeout as sleep } from "node:timers/promises"
+ 
  function timeOutExample():void{
     console.log("1. This runs First")
 
@@ -24,6 +26,7 @@
       if(count === 6){
 
          clearInterval(setTime)
+         console.log("stopped")
 
       }
    }, 2000)
@@ -38,12 +41,23 @@
      console.log("synchronous code after Calling")
  }
 
+async function runTimePromiseExample():Promise<void>{
+   console.log("9. waiting for promise based timer")
+   // await setTimeout(()=>{}, 1500)
+
+   await sleep(8000)
+   console.log("10. promise")
+}
  function runFunc():void{
     timeOutExample()
     runClearTimeoutExample()
-    runClearTimeoutExample()
+   //  runClearTimeoutExample()
    clearTimeoutExample()
    runImmediateExample()
  }
 
  runFunc()
+ runTimePromiseExample().catch((err:unknown)=>{
+   console.error("timer based demo", err)
+ })
+
