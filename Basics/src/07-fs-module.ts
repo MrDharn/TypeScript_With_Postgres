@@ -94,7 +94,7 @@ async function main(): Promise<void> {
         checkIfFolderExists()
         const result = runSyncExample()
         const callback = await runCallBackExample()
-        const promiseMeans = runPromiseExample()
+        const promiseMeans = await runPromiseExample()
 
         console.log([result, callback, promiseMeans])
     } catch (e) {
