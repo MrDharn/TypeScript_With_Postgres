@@ -1,10 +1,13 @@
 import path from "node:path";
 import fs from 'fs'
+import fsPromises from "fs/promises"
 
 
 const PATH_TO_FILE = path.join(process.cwd(), "file-system", "fs-demo");
 const SYN_FILE = path.join(PATH_TO_FILE, "fs-demo.txt")
 const CALL_BACK_FILE = path.join(PATH_TO_FILE, "callback.txt")
+const PROMISE_FILE = path.join(PATH_TO_FILE, "promise.txt")
+
 
 type fileResult = {
     type: string;
@@ -72,13 +75,28 @@ function runCallBackExample(): Promise<fileResult> {
 
     })
 }
+
+async function runPromiseExample(): Promise<fileResult>{
+    
+        await fsPromises.writeFile(PROMISE_FILE, "Created this using promise", "utf-8")
+        await fsPromises.appendFile(PROMISE_FILE, "appending file using promise", "utf-8")
+        const content = await fsPromises.readFile(PROMISE_FILE, "utf-8")
+        const statSize = await fsPromises.stat(PROMISE_FILE)
+        return {
+            type: "Promises",
+            fileName: path.basename(PROMISE_FILE),
+            content,
+            fileInByte: statSize.size
+        }
+}
 async function main(): Promise<void> {
     try {
         checkIfFolderExists()
         const result = runSyncExample()
         const callback = await runCallBackExample()
+        const promiseMeans = runPromiseExample()
 
-        console.log([result, callback])
+        console.log([result, callback, promiseMeans])
     } catch (e) {
         const message = e instanceof Error ? e.message : "UNKNOWN ERROR LOG"
         console.error("Error in SYN", message)
