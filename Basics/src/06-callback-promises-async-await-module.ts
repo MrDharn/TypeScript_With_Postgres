@@ -65,8 +65,25 @@ function getUserWithPromise(userId: number): Promise<User>{
     })
 }
 
-getUserWithPromise(10).then((user)=>{
-    console.log("promise result", user?.id, user?.name, user?.role)
-}).catch((error: Error)=>{
-    console.log("Error message", error)
-})
+
+async function  findUserWithAsyncAwait(userId:number):Promise<void> {
+    try{
+
+        const getUser = await getUserWithPromise(userId);
+        console.log(`${getUser?.name}`)
+        return 
+
+    }catch(e){
+        const message = e instanceof Error ? e.message : "UNKNOWN"
+        console.log("async/ await ",message)
+    }
+}
+
+// getUserWithPromise(10).then((user)=>{
+//     console.log("promise result", user?.id, user?.name, user?.role)
+// }).catch((error: Error)=>{
+//     console.log("Error message", error)
+// })
+
+
+findUserWithAsyncAwait(10)
