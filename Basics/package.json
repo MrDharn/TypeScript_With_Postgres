@@ -15,7 +15,8 @@
     "08" : "tsx src/08-buffer-module.ts",
     "09" : "tsx src/09-url-module.ts",
     "10" : "tsx src/10-event-emitter-module.ts",
-    "11" : "tsx src/11-stream-module.ts"
+    "11" : "tsx src/11-stream-module.ts",
+    "12" : "tsx  src/12-basic-http-server.ts"
   },
   "keywords": [],
   "author": "",
