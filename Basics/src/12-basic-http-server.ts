@@ -10,9 +10,10 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse)=> {
 
     const userAgent = req.headers["user-agent"]
     res.statusCode = 200
+    // res.setHeader("Content-Type", "application/json")
     res.setHeader("Content-Type", "text/plain")
-
-    res.end(`Basic http node server: ${method}`)
+    console.log(url, userAgent, method)
+    res.end(`Basic http node server: ${method}, ${url}`)
 })
 
 server.listen(PORT, ()=>{
