@@ -6,6 +6,7 @@ type UserSchema = {
     name?: string;
     email?: string;
 }
+
 const server = http.createServer((req: IncomingMessage, res: ServerResponse)=> {
 
     const method = req.method ?? "GET"
@@ -48,3 +49,4 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse)=> {
         })
     }
 })
+
