@@ -2,17 +2,20 @@ import http, {IncomingMessage, ServerResponse} from "node:http"
 
 const PORT = 3000
 
-const server = http.createServer((req:IncomingMessage, res:ServerResponse)=>{
-    const method = req.method?? "GET"
-    const requestUrl = new URL(req.url ?? "/", `http://${req.headers.host ?? "localhost"}`)
-    const pathName = requestUrl.pathname
-
-    res.setHeader("Content-Type", "text/plain")
-
     type CreateUserBody = {
         name?: string;
         email?: string;
     }
+
+const server = http.createServer((req:IncomingMessage, res:ServerResponse)=>{
+    const method = req.method?? "GET"
+    const requestUrl = new URL(req.url ?? "/", `http://${req.headers.hostname ?? "localhost"}`)
+    const pathName = requestUrl.pathname
+
+
+    // console.log(method, requestUrl, pathName) hostname or host (both works)
+
+    res.setHeader("Content-Type", "text/plain")
     if(method === "POST" && pathName === "/users"){
         const chunks: Buffer [] = []
 
@@ -33,7 +36,8 @@ const server = http.createServer((req:IncomingMessage, res:ServerResponse)=>{
 
             if(!body.name || !body.email){
                 res.statusCode = 400
-                res.end("Both email and password is required")
+                res.end("Both email and name are required")
+                return
             }
 
             res.statusCode = 201
@@ -50,6 +54,8 @@ const server = http.createServer((req:IncomingMessage, res:ServerResponse)=>{
             res.statusCode = 500
             res.end("Failed to read request body")
         })
+
+        return
     }
 
     res.statusCode = 404
