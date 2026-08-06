@@ -1,5 +1,7 @@
 import http, {IncomingMessage, ServerResponse} from "node:http"
 
+const PORT = 3000
+
 const server = http.createServer((req:IncomingMessage, res:ServerResponse)=>{
     const method = req.method?? "GET"
     const requestUrl = new URL(req.url ?? "/", `http://${req.headers.host ?? "localhost"}`)
@@ -53,4 +55,8 @@ const server = http.createServer((req:IncomingMessage, res:ServerResponse)=>{
     res.statusCode = 404
     res.end("Route not found")
 
+})
+
+server.listen(PORT, ()=> {
+    console.log(`The server is running on the localhost ${PORT}`)
 })
