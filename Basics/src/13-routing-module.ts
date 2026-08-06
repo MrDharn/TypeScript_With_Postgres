@@ -6,7 +6,7 @@ const server = http.createServer((
     req: IncomingMessage, res: ServerResponse
 )=>{
     const method = req.method?? "GET"
-    const requestUrl = new URL(req.url?? "/", `http:${req.headers.hostname}`)
+    const requestUrl = new URL(req.url?? "/", `http://${req.headers.host ?? "localhost"}`)
     const pathName = requestUrl.pathname
     res.setHeader("Content-Type", 'text/plain')
 
