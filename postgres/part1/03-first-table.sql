@@ -21,3 +21,6 @@ VALUES
  ('Dharn', 'dharn@exmaple.com', 22),
  ('SAM', 'sam@example.com', 55),
  ('Julian', 'julian@example.com', 70);
+
+
+ SELECT * FROM basics.students
