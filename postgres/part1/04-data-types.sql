@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS basics.products_basics
+DROP TABLE IF EXISTS basics.products_basic;
 
-CREATE TABLE basics.products_basic(
+CREATE TABLE basics.products_basic (
     id SERIAL PRIMARY KEY,
 
     name VARCHAR(100) NOT NULL,
@@ -17,14 +17,13 @@ CREATE TABLE basics.products_basic(
     isActive BOOLEAN DEFAULT true
 );
 
-INSERT INTO basics.products_basics
+INSERT INTO basics.products_basic
 (name, description, stock, total_views, price, isActive)
 VALUES
-('product 1' 'product desc', 100, 2400, 
-5000, true), 
+('product 1', 'product desc', 100, 2400, 5000, true), 
 ('product 2', 'product desc wella', 300, 4000, 12000, false);
 
-SELECT * FROM basics.products_basics;
+SELECT * FROM basics.products_basic;
 
-SELECT id, name, price FROM basics.products_basics
-WHERE isActive;
+SELECT id, name, price FROM basics.products_basic
+WHERE isActive; 
