@@ -13,4 +13,8 @@
  ('zoom', 20, NULL),
  ('', 40, 50);
 
- SELECT * FROM basics.value_examples;
+--  SELECT * FROM basics.value_examples;
+
+-- SELECT * FROM basics.value_examples WHERE nickname IS NULL;
+
+SELECT * FROM basics.value_examples WHERE nickname IS NOT NULL;
