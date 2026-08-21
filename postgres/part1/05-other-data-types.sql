@@ -18,4 +18,9 @@ CREATE TABLE basics.app_events (
  ('sign up', '{"browser": "chrome"}'),
  ('sign in', '{"user" : "dharn"}');
 
- SELECT *  FROM basic.app_events;
+ SELECT *  FROM basics.app_events;
+
+ SELECT event_name, 
+        metadata ->> 'user' AS user
+FROM basics.app_events 
+WHERE metadata ? 'user';
