@@ -12,6 +12,7 @@ CREATE TABLE basics.sales (
 
 INSERT INTO basics.sales (product, price)
 VALUES ('product 1', 400),
-('product 2', 100);
+('product 2', 100),
+
 
 SELECT * FROM basics.sales;
