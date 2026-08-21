@@ -18,3 +18,5 @@
 -- SELECT * FROM basics.value_examples WHERE nickname IS NULL;
 
 SELECT * FROM basics.value_examples WHERE nickname IS NOT NULL;
+
+SELECT * FROM basics.value_examples WHERE nickname = '';
