@@ -15,6 +15,7 @@ CREATE TABLE basics.accounts (
 );
 
 INSERT INTO basics.accounts (firstName, email, age)
-VALUES ('dharn', 'dharn@example.com', 40);
-
+VALUES ('dharn', 'dharn@example.com', 40),
+('dharn', 'dharn@example.com', 50);
+-- ('womain', 'empty@example.com', 12);
 SELECT * FROM basics.accounts;
