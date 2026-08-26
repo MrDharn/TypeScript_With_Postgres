@@ -1,4 +1,4 @@
-INSERT INTO (name, price, description, stock, sku)
+INSERT INTO products(name, price, description, stock, sku)
 VALUES
 (
     'Wireless Noise-Canceling Headphones 00X1', 
