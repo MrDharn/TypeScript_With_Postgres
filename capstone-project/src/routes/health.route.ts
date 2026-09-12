@@ -1,12 +1,12 @@
-import expres from 'express'
+import express from 'express'
 
-const healthRoute = expres.Router()
+export const healthRoute = express.Router()
 
-healthRoute.route('/').get((_req, res)=>{
+healthRoute.route('/health').get((_req, res)=>{
     res.status(200).json({
         status: "false",
-        message: "Route is working perfectly!!"
+        message: "Health Route is working perfectly!!"
     })
 })
 
-module.exports = healthRoute
+
