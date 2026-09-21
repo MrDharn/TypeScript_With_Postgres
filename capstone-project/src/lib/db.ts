@@ -1,6 +1,9 @@
 
 import {Pool} from 'pg'
+import { env } from 'process'
 
-const pool = new Pool({
+export const pool = new Pool({
+
+    connectionString: env.databaseUrl
 
 })
