@@ -25,8 +25,8 @@ async function getExecutedMigrations():Promise<String[]>{
 
 function getMigrationsFiles():string[]{
     return fs.readdirSync(MIGRATION_DIR).filter((file)=> file.endsWith('.sql')).sort()
-
 }
+
 
 async function migrate():Promise<void>{
     await pool.query(CREATE_MIGRATIONS_TABLE_SQL)
@@ -36,6 +36,11 @@ async function migrate():Promise<void>{
 
     if(pending.length === 0){
         logger.info('There is no Pending table')
+        return
+    }
+
+    for(const fileName of pending){
+        await runMigration(fileName)
     }
 }
 
