@@ -28,6 +28,22 @@ function getMigrationsFiles():string[]{
 }
 
 
+async function runMigration(fileName: string):Promise<void>{
+    const sql = fs.readFileSync(path.join(MIGRATION_DIR, fileName), 'utf-8')
+    const client = await pool.connect()
+
+    try{
+        await client.query('BEGIN')
+        await client.query(sql)
+        await client.query('INSERT INTO migrations name VALUE()')
+    }catch(e){
+        await client.query('ROLLBACK')
+        throw new Error()
+    }finally{
+        client.release
+    }
+}
+
 async function migrate():Promise<void>{
     await pool.query(CREATE_MIGRATIONS_TABLE_SQL)
 
