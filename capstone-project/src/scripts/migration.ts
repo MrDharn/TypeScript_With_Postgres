@@ -16,7 +16,7 @@ type MigrationRow = {
     name: string
 }
 
-async function getExecutedMigrations():Promise<String[]>{
+async function getExecutedMigrations():Promise<string[]>{
     const result = await pool.query<MigrationRow>(
         "SELECT name FROM migrations ORDER BY name"
     )
@@ -35,12 +35,15 @@ async function runMigration(fileName: string):Promise<void>{
     try{
         await client.query('BEGIN')
         await client.query(sql)
-        await client.query('INSERT INTO migrations name VALUE()')
+        await client.query('INSERT INTO migrations (name) VALUES ($1)', [fileName])
+        await client.query('COMMIT')
+
+        logger.info(`migration complete: ${fileName}`)
     }catch(e){
         await client.query('ROLLBACK')
-        throw new Error()
+        throw e
     }finally{
-        client.release
+        client.release()
     }
 }
 
@@ -58,6 +61,12 @@ async function migrate():Promise<void>{
     for(const fileName of pending){
         await runMigration(fileName)
     }
+
+    logger.info("All migrations completed")
+
 }
 
-migrate()
+migrate().catch((error)=>{
+    logger.error({err: error}, 'migrations failed')
+    process.exit(1)
+} ).finally(()=> pool.end())
