@@ -1,0 +1,1 @@
+export const passwordLength: number = 6 as const
