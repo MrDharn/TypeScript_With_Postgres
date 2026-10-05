@@ -11,7 +11,8 @@ export async function checkUserAvailability(email: string): Promise<DBUserRow>{
 
 export async function createUser(email: string, password_hash: string):Promise<user>{
     const result = await pool.query<user>(`
-       INSERT INTO users (email, password_harsh) values($1, $2) 
+       INSERT INTO users (email, password_harsh) values($1, $2)
+       RETURNING id, email, role, created_ata
         `, [email, password_hash])
 
         return result.rows[0]
