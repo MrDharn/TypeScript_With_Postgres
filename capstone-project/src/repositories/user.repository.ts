@@ -14,6 +14,7 @@ export async function createUser(email: string, password_hash: string):Promise<u
        INSERT INTO users (email, password_harsh) values($1, $2)
        RETURNING id, email, role, created_at
         `, [email, password_hash])
+    
 
         return result.rows[0]
 }
