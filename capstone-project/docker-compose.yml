@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "2580"
-      POSTGRES_DB: support_desk
+      POSTGRES_DB: capstone_project
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

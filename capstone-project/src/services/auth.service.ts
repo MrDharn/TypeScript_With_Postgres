@@ -1,6 +1,7 @@
 import { passwordLength } from "../constant/const";
 import { AppError } from "../error/error";
-import { checkUserAvailability, createUser } from "../repositories/user.repository";
+import { signAccessToken } from "../lib/jwt";
+import { checkUserAvailability, createUser , checkEmailAvailabilityAndPassword} from "../repositories/user.repository";
 import bcrypt from 'bcrypt'
 
 export async function userRegistration(email: string, password: string):Promise<void> {
@@ -26,3 +27,31 @@ export async function userRegistration(email: string, password: string):Promise<
 
 
 }
+
+
+export async function userLogin(email: string, password:string): Promise<{accessToken: string}> {
+       if(!email || !password){
+            throw new AppError(400, "Email or password is empty");
+        }
+
+        const normalizeEmail = email.toLowerCase().trim()
+
+        const isEmailExisting = await checkEmailAvailabilityAndPassword(normalizeEmail)
+
+        if(!isEmailExisting?.password_hash){
+            throw new AppError(404, 'Email or password is not correct')
+        }
+    const isPasswordValid = await bcrypt.compare(password, isEmailExisting.password_hash)
+    if(!isPasswordValid){
+        throw new AppError(400, 'Email or password is not correct')
+    }
+
+
+    const accessToken = signAccessToken({
+        userId: isEmailExisting.id,
+        email: isEmailExisting.email,
+        role: isEmailExisting.role
+    })
+
+    return {accessToken}
+}   

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userRegistration } from "../services/auth.service";
+import { userLogin, userRegistration } from "../services/auth.service";
 export const authRouter = Router();
 
 authRouter.post('/register', async(req, res, next)=> {
@@ -16,4 +16,20 @@ try{
 }catch(e){
     next(e)
 }
+})
+
+
+authRouter.post('/login', async(req, res, next)=> {
+    try{
+        const {email, password} = req.body
+
+        const {accessToken} = await userLogin(email, password)
+
+        res.status(200).json({
+            status: "failed",
+            data: {accessToken}
+        })
+    }catch(e){
+        next(e)
+    }
 })

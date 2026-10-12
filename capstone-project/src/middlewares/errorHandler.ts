@@ -13,6 +13,8 @@ export function errorHandler(
             status: 'failed',
             message: err.message
         })
+
+        return
     }
 
     logger.error({err}, "Unknown Error")
