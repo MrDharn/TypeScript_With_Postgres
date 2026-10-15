@@ -35,7 +35,7 @@ authRouter.post('/login', async(req, res, next)=> {
     }
 })
 
-authRouter.get('/me',authenticate, (req, res)=> {
+authRouter.get('/me', authenticate, (req, res)=> {
     res.status(200).json({
         status: 'successful',
         data: req.user
