@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userLogin, userRegistration } from "../services/auth.service";
+import { authenticate } from "../middlewares/auth.middleware";
 export const authRouter = Router();
 
 authRouter.post('/register', async(req, res, next)=> {
@@ -32,4 +33,11 @@ authRouter.post('/login', async(req, res, next)=> {
     }catch(e){
         next(e)
     }
+})
+
+authRouter.get('/me',authenticate, (req, res)=> {
+    res.status(200).json({
+        status: 'successful',
+        data: req.user
+    })
 })
