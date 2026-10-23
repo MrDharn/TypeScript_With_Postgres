@@ -20,7 +20,7 @@ function checkTaskValidity(title: unknown): string{
 
 export async function createUserTask(title:unknown, userId: string): Promise<task>{
 
-    const validateTask =  checkTaskValidity(title)
+    const validateTaskTitle =  checkTaskValidity(title)
 
-    return createTask(validateTask, userId)
+    return createTask(validateTaskTitle, userId)
 }
