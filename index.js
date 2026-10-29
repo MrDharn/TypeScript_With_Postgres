@@ -1,33 +1,43 @@
-let number = 50
-let tobi = 50
-console.log(number + tobi)
-
-let Number1 = 50
-let Binary = 70
-console.log(Binary - Number1)
+// // import prompt from 'prompt-sync'
+const prompt = require('prompt-sync')({ sigint: true });
 
 
-let people = 5
-let  student = 5
-console.log(people * student)
+// let userAge = parseInt(prompt("Please Enter your age to check? "))
 
-console.log(friction / function2)
-let y= 34
-let z ="10"
-console.log(y + z)
+// if(userAge < 5){
+//     console.log("children under 5 are free")
+// }else if(userAge <= 12){
+//     console.log("child ticket applied")
+// }else if(userAge >= 65){
+//     console.log("senior discount applied" + " " + userAge)
+// }else{
+//     console.log("standard adult applied")
+// }
 
+// let num1 = 100
+// let num2 = 300
+// let sum = num1 + num2
+// console.log("The sum of" + " " + num1 + " and" + num2 + " is " + sum)
 
-// let newCompare = friction > function2
+// template literals
+// console.log(`The sum of ${num1} and ${num2} is ${sum}`)
+// const myage = 30
+// myage = 50
+// console.log(myage)
 
-// conditional statement
+const myAge = parseInt(prompt("Please enter your age? "))
+let ticketPrice = 0.00
 
-let friction = 3
-let function2 = 12
-
-if(friction > function2){
-    console.log("Friction is indeed greater than function2")
-}else if(friction === function2){
-    console.log("Theyx are the same")
+if(myAge < 5){
+    ticketPrice = 0.00
+    console.log(`Ticke is ${ticketPrice} for children`)
+} else if(myAge <= 12){
+    ticketPrice = 8.00
+    console.log(`Ticket price is ${ticketPrice} for Child`)
+}else if(myAge >=65){
+    ticketPrice = 10.00
+    console.log(`Ticket price is ${ticketPrice} for senior`)
 }else{
-    console.log("None of the above")
+    ticketPrice = 15.00
+    console.log(`Ticket price is ${ticketPrice} for standard adult`)
 }

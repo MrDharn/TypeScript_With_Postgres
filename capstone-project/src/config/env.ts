@@ -3,7 +3,7 @@ dotenv.config()
 
 
 export function checkRequiredValue(key: string):string{
-    const value = process.env.key
+    const value = process.env[key]
     if(!value){
         throw new Error(`The key ${key} is empty`)
     }
